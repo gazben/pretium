@@ -1,0 +1,40 @@
+image: node:12-stretch
+
+stages:
+  - install
+  - deploy
+
+.install_npm_template:
+  stage: install
+  artifacts:
+    expire_in: 20 mins
+    paths:
+      - build/
+  script:
+    - npm ci
+    - npm run build
+
+install_npm_master:
+  extends: .install_npm_template
+  only:
+    - master
+
+.deploy_template:
+  stage: "deploy"
+  image: google/cloud-sdk
+  script:
+    - echo ${CI_GCLOUD_ACCOUNT_KEY} > key.json
+    - gcloud auth activate-service-account ${CI_GCLOUD_ACCOUNT_EMAIL} --key-file key.json
+    - gsutil -m cp -R build/* gs://${CDN_BUCKET}/
+  environment:
+    name: $CI_COMMIT_REF_NAME
+    url: $CDN_BUCKET
+
+deploy_master:
+  extends: .deploy_template
+  only:
+    - master
+  variables:
+    CDN_BUCKET: $CDN_BUCKET_MASTER
+    CI_GCLOUD_ACCOUNT_KEY: $CI_GCLOUD_ACCOUNT_KEY_MASTER
+    CI_GCLOUD_ACCOUNT_EMAIL: $CI_GCLOUD_ACCOUNT_EMAIL_MASTER
