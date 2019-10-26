@@ -1,5 +1,8 @@
 import React from 'react';
+import './Landing.scss';
 
 export function Landing() {
-  return <p>Landing component will be here</p>;
+  return (
+    <div className="landing bg-cover bg-center bg-no-repeat h-screen"></div>
+  );
 }
