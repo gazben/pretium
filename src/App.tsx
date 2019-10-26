@@ -1,16 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { KeplerContainer, Landing } from './components';
+import { KeplerContainer } from './components';
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/visualize">
-          <KeplerContainer />
-        </Route>
         <Route path="/">
-          <Landing />
+          <KeplerContainer />
         </Route>
       </Switch>
     </Router>

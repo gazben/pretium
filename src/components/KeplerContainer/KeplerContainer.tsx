@@ -1,3 +1,4 @@
+import CircularProgress from '@material-ui/core/CircularProgress';
 import KeplerGl from 'kepler.gl';
 import React, { Component } from 'react';
 import { connect, ReactReduxContext } from 'react-redux';
@@ -21,7 +22,11 @@ class KeplerContainerComponent extends Component<Props> {
     const { loading, error, data } = this.props;
 
     if (loading) {
-      return 'Loading...';
+      return (
+        <div className="flex items-center justify-center h-screen">
+          <CircularProgress />
+        </div>
+      );
     }
 
     if (error) {
