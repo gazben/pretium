@@ -41,7 +41,7 @@ class KeplerContainerComponent extends Component<Props> {
           return (
             <KeplerGl
               width={window.outerWidth}
-              height={window.outerHeight}
+              height={window.innerHeight}
               mapboxApiAccessToken={token}
               appName="Pretium"
               store={store}
