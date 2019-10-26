@@ -4,3 +4,6 @@ import { keplerGl } from './kepler-gl.reducer';
 import { mapData } from './map-data.reducer';
 
 export const rootReducer = combineReducers<AppState>({ keplerGl, mapData });
+
+export * from './kepler-gl.reducer';
+export * from './map-data.reducer';

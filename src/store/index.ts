@@ -10,3 +10,6 @@ export const store = createStore(
   rootReducer,
   applyMiddleware(...enhanceReduxMiddleware(middlewares))
 );
+
+export * from './actions';
+export * from './reducers';

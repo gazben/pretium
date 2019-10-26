@@ -1,24 +1,56 @@
 import KeplerGl from 'kepler.gl';
-import React from 'react';
-import { ReactReduxContext } from 'react-redux';
+import React, { Component } from 'react';
+import { connect, ReactReduxContext } from 'react-redux';
+import { AppState, fetchMapData, MapDataState } from '../../store';
 
 const token =
   'pk.eyJ1IjoicHRlcmJsZ2giLCJhIjoiY2syN2dyODRyMHY1eTNia3h6eWQydTA2ZCJ9.JFwFiFT4YnMDc8hCjMicEg';
 
-export const KeplerContainer = () => {
-  return (
-    <ReactReduxContext.Consumer>
-      {({ store }) => {
-        return (
-          <KeplerGl
-            width={window.outerWidth}
-            height={window.outerHeight}
-            mapboxApiAccessToken={token}
-            appName="Pretium"
-            store={store}
-          />
-        );
-      }}
-    </ReactReduxContext.Consumer>
-  );
-};
+interface DispatchProps {
+  fetchMapData: () => void;
+}
+type Props = MapDataState & DispatchProps;
+
+class KeplerContainerComponent extends Component<Props> {
+  componentDidMount() {
+    this.props.fetchMapData();
+  }
+
+  render() {
+    const { loading, error, data } = this.props;
+
+    if (loading) {
+      return 'Loading...';
+    }
+
+    if (error) {
+      return 'Oooops....something went wrong';
+    }
+
+    console.log({ data });
+
+    return (
+      <ReactReduxContext.Consumer>
+        {({ store }) => {
+          return (
+            <KeplerGl
+              width={window.outerWidth}
+              height={window.outerHeight}
+              mapboxApiAccessToken={token}
+              appName="Pretium"
+              store={store}
+            />
+          );
+        }}
+      </ReactReduxContext.Consumer>
+    );
+  }
+}
+
+const mapStateToProps = (state: AppState) => state.mapData;
+const mapDispatchToProps = { fetchMapData };
+
+export const KeplerContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(KeplerContainerComponent);
