@@ -14,6 +14,7 @@ export const KeplerContainer = () => {
             width={window.outerWidth}
             height={window.outerHeight}
             mapboxApiAccessToken={token}
+            appName="Pretium"
             store={store}
           />
         );
