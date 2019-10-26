@@ -26,7 +26,7 @@ install_npm_master:
     - echo ${CI_GCLOUD_ACCOUNT_KEY} > key.json
     - gcloud auth activate-service-account ${CI_GCLOUD_ACCOUNT_EMAIL} --key-file key.json
     - gsutil -m cp -R build/* gs://${CDN_BUCKET}/
-    - gsutil acl ch -u AllUsers:R gs://${CDN_BUCKET}/
+    - gsutil acl ch -r -u AllUsers:R gs://${CDN_BUCKET}/
   environment:
     name: $CI_COMMIT_REF_NAME
     url: $CDN_BUCKET
