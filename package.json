@@ -45,5 +45,10 @@
   },
   "lint-staged": {
     ".{ts,tsx,scss,json}": "prettier --find-config-path --write"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
