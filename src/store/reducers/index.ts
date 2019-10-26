@@ -1,4 +1,4 @@
-import keplerGlReducer from 'kepler.gl/reducers';
 import { combineReducers } from 'redux';
+import { keplerGl } from './kepler-gl.reducer';
 
-export const rootReducer = combineReducers({ keplerGl: keplerGlReducer });
+export const rootReducer = combineReducers({ keplerGl });
