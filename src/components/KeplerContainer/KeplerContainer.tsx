@@ -13,7 +13,8 @@ type Props = MapDataState & DispatchProps;
 
 class KeplerContainerComponent extends Component<Props> {
   componentDidMount() {
-    this.props.fetchMapData();
+    const { fetchMapData } = this.props;
+    fetchMapData();
   }
 
   render() {
