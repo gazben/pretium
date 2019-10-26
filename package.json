@@ -44,7 +44,7 @@
     "node-sass": "^4.13.0"
   },
   "lint-staged": {
-    ".{ts,tsx,scss,json}": "prettier --find-config-path --write"
+    "*.{ts,tsx,scss,json}": "prettier --find-config-path --write"
   },
   "husky": {
     "hooks": {
