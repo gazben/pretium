@@ -8,6 +8,7 @@
     "@types/react": "^16.9.11",
     "@types/react-dom": "^16.9.3",
     "kepler.gl": "^1.1.9",
+    "prettier": "^1.18.2",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-redux": "^7.1.1",
@@ -37,6 +38,10 @@
     ]
   },
   "devDependencies": {
+    "lint-staged": "^10.0.0-1",
     "node-sass": "^4.13.0"
+  },
+  "lint-staged": {
+    ".tsx": "prettier --find-config-path --write"
   }
 }
