@@ -1,4 +1,6 @@
+import { addDataToMap } from 'kepler.gl/actions';
 import { ThunkAction } from 'redux-thunk';
+import { loadToKepler } from '../../../utils';
 import { AppState } from '../types';
 import {
   FETCH_MAP_DATA_FAILED,
@@ -25,7 +27,16 @@ export function fetchMapData(): ThunkAction<
         return response.json();
       })
       .then(
-        data => dispatch({ type: FETCH_MAP_DATA_SUCCEEDED, data }),
+        data => {
+          dispatch({ type: FETCH_MAP_DATA_SUCCEEDED });
+          const loadedData = loadToKepler(
+            'stork_movement',
+            'Stork movement 2010-2019',
+            data
+          );
+
+          dispatch(addDataToMap(loadedData));
+        },
         error => dispatch({ type: FETCH_MAP_DATA_FAILED, error })
       );
   };

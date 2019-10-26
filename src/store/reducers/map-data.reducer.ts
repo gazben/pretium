@@ -33,8 +33,7 @@ export function mapData(
     case FETCH_MAP_DATA_SUCCEEDED: {
       return {
         ...state,
-        loading: false,
-        data: action.data
+        loading: false
       };
     }
 

@@ -1,7 +1,8 @@
 export interface DataPoint {
-  device_id: string;
-  event_id: number;
+  id: number;
+  device: string;
   timestamp: number;
+  dateTime: string;
   lng: number;
   lat: number;
 }
@@ -16,7 +17,6 @@ interface FetchMapDataAction {
 
 interface FetchMapDataSucceededAction {
   type: typeof FETCH_MAP_DATA_SUCCEEDED;
-  data: DataPoint[];
 }
 
 interface FetchMapDataFailedAction {
